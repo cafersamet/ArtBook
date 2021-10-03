@@ -4,11 +4,19 @@
 
     <data>
 
+        <variable
+            name="art"
+            type="com.gllce.artbook.roomdb.Art" />
+
+        <variable
+            name="clickListener"
+            type="com.gllce.artbook.util.ItemClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{ (view) -> clickListener.onClicked(view, art.id)}"
         android:orientation="horizontal"
         android:padding="16dp">
 
@@ -17,8 +25,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:contentDescription="Art Image"
+            android:downloadImage="@{art.imageURL}"
             android:scaleType="centerCrop"
-            android:src="@color/teal_700"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="4dp"
-                android:text="Art Name"
+                android:text="@{art.name}"
                 android:textSize="28sp" />
 
             <TextView
@@ -49,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="4dp"
-                android:text="Artist Name"
+                android:text="@{art.artistName}"
                 android:textSize="20sp" />
 
             <TextView
@@ -58,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="4dp"
-                android:text="Year"
+                android:text="@{String.valueOf(art.year)}"
                 android:textSize="18sp" />
         </LinearLayout>
 

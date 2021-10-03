@@ -2,7 +2,10 @@ package com.gllce.artbook.di
 
 import android.content.Context
 import androidx.room.Room
+import com.gllce.artbook.api.ArtRepository
+import com.gllce.artbook.api.ArtRepositoryInterface
 import com.gllce.artbook.api.ImageApi
+import com.gllce.artbook.roomdb.ArtDao
 import com.gllce.artbook.roomdb.ArtDatabase
 import com.gllce.artbook.util.Util.BASE_URL
 import com.google.gson.Gson
@@ -38,4 +41,9 @@ object AppModule {
         .baseUrl(BASE_URL)
         .build()
         .create(ImageApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideArtRepository(artDao: ArtDao, imageApi: ImageApi) =
+        ArtRepository(artDao, imageApi) as ArtRepositoryInterface
 }
